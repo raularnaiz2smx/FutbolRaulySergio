@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futbol2SMR - Clasificaciones y Máximos Goleadores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #d4ff00 0%, #b3ff00 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Barra de navegación */
+        header {
+            background: linear-gradient(90deg, #d4ff00 0%, #b3ff00 100%);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            min-height: 70px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu > li > a {
+            display: block;
+            padding: 15px 14px;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu > li > a:hover {
+            background-color: rgba(26, 26, 26, 0.08);
+            border-bottom-color: #1a1a1a;
+        }
+
+        .nav-menu > li > a.active {
+            border-bottom-color: #1a1a1a;
+            background-color: rgba(26, 26, 26, 0.12);
+        }
+
+        /* Submenú desplegable */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            list-style: none;
+            min-width: 200px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .nav-menu li:hover .submenu {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .submenu li a {
+            display: block;
+            padding: 12px 16px;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .submenu li a:hover {
+            background-color: #d4ff00;
+            border-left-color: #1a1a1a;
+            padding-left: 20px;
+        }
+
+        .submenu li a.active {
+            background-color: #b3ff00;
+            border-left-color: #228B22;
+            font-weight: 700;
+        }
+
+        /* Contenedor principal */
+        .hero-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+        }
+
+        .hero-content {
+            animation: slideInLeft 0.8s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            animation: slideInRight 0.8s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .logo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .logo-container svg {
+            width: 100%;
+            height: auto;
+            max-width: 350px;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: auto;
+            max-width: 350px;
+            object-fit: contain;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #228B22;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+                gap: 40px;
+                min-height: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                margin-top: 40px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu > li > a {
+                padding: 12px 10px;
+                font-size: 10px;
+            }
+
+            .submenu {
+                position: static;
+                display: none;
+                box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+                min-width: auto;
+                border-radius: 0;
+            }
+
+            .nav-menu li:hover .submenu {
+                display: block;
+            }
+
+            .logo-container {
+                min-height: 300px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li>
+                    <a href="paginainicio.html" class="nav-link active">INICIO</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">LIGA EA SPORTS</a>
+                    <ul class="submenu">
+                        <li><a href="LALIGA_Clasificación.html" class="nav-sublink">Clasificación</a></li>
+                        <li><a href="#laliga-goleadores" class="nav-sublink">Máximos Goleadores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">PREMIER LEAGUE</a>
+                    <ul class="submenu">
+                        <li><a href="Premier_Clasificación.html" class="nav-sublink">Clasificación</a></li>
+                        <li><a href="MaximoGoleadoresPremier.html" class="nav-sublink">Máximos Goleadores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">SERIE A</a>
+                    <ul class="submenu">
+                        <li><a href="#seria-clasificacion" class="nav-sublink">Clasificación</a></li>
+                        <li><a href="#seria-goleadores" class="nav-sublink">Máximos Goleadores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">BUNDESLIGA</a>
+                    <ul class="submenu">
+                        <li><a href="#bundesliga-clasificacion" class="nav-sublink">Clasificación</a></li>
+                        <li><a href="#bundesliga-goleadores" class="nav-sublink">Máximos Goleadores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">LEAGUE 1</a>
+                    <ul class="submenu">
+                        <li><a href="#league1-clasificacion" class="nav-sublink">Clasificación</a></li>
+                        <li><a href="#league1-goleadores" class="nav-sublink">Máximos Goleadores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">LIGA HYPERMOTION</a>
+                    <ul class="submenu">
+                        <li><a href="#hypermotion-clasificacion" class="nav-sublink">Clasificación</a></li>
+                        <li><a href="#hypermotion-goleadores" class="nav-sublink">Máximos Goleadores</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Futbol2SMR</h1>
+            <p>Clasificaciones y máximos goleadores de las 6 mejores ligas del mundo en un solo lugar.</p>
+        </div>
+
+        <div class="hero-visual">
+            <div class="logo-container">
+                <img src="ChatGPT Image 26 ene 2026, 08_34_16 (1).png" alt="Futbol2SMR Logo" class="logo-image">
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Ligas Principales</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">Equipos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Datos Actualizados</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
