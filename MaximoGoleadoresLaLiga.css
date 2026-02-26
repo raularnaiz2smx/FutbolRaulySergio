@@ -1,171 +1,70 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background-color: #228B22; /* Verde oscuro tipo campo de fútbol */
-    font-family: 'Arial', sans-serif;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #d4f8d4; /* Verde clarito */
+    text-align: center;
+}
+
+.header {
     padding: 30px 20px;
-    min-height: 100vh;
 }
 
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: #f5f5f5;
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+.logo {
+    width: 120px;
+    margin-bottom: 10px;
 }
-
 
 h1 {
-    text-align: center;
-    color: #228B22;
-    margin-bottom: 20px;
-    font-size: 2.8em;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px 0 5px 0;
+    font-size: 32px;
+    color: #1b5e20;
 }
-
 
 h2 {
-    text-align: center;
-    color: #1a6b1a;
-    margin-bottom: 30px;
-    font-size: 1.8em;
-    letter-spacing: 1px;
+    margin: 0;
+    font-weight: normal;
+    color: #2e7d32;
 }
 
-
-img {
-    display: block;
-    margin: 0 auto 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.tabla-contenedor {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
-
 
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 80%;
+    max-width: 900px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-
 thead {
-    background-color: #228B22;
+    background-color: #2e7d32;
     color: white;
 }
 
-th {
-    padding: 18px 12px;
+th, td {
+    padding: 15px;
     text-align: center;
-    font-weight: bold;
-    font-size: 14px;
-    border-bottom: 3px solid #1a6b1a;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-
-th:nth-child(2) {
-    text-align: left;
-}
-
-
-tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.3s ease;
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 tbody tr:hover {
-    background-color: #f0f8f0;
+    background-color: #c8e6c9;
+    transition: 0.3s;
 }
 
-
-tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-
-td {
-    padding: 15px 12px;
-    text-align: center;
-    font-size: 14px;
-}
-
-
-td:nth-child(2) {
-    text-align: left;
-    font-weight: 500;
-}
-
-
-td:nth-child(1) {
+td:first-child {
     font-weight: bold;
-    color: #228B22;
-    font-size: 16px;
 }
-
-
-td:nth-child(3) {
-    font-weight: bold;
-    color: #228B22;
-    font-size: 15px;
-}
-
-
-td:nth-child(10) {
-    font-weight: 500;
-}
-
-
-@media (max-width: 768px) {
-    body {
-        padding: 15px 10px;
-    }
-    
-    .container {
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 1.8em;
-    }
-    
-    h2 {
-        font-size: 1.3em;
-    }
-    
-    th, td {
-        padding: 10px 8px;
-        font-size: 12px;
-    }
-    
-    img {
-        width: 80px !important;
-        height: 80px !important;
-    }
-}
-
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #228B22;
-            padding: 30px 20px;
-            min-height: 100vh;
-        }
-
-        /* Barra de navegación */
+ /* Barra de navegación */
         header {
             background: linear-gradient(90deg, #d4ff00 0%, #b3ff00 100%);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
