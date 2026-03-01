@@ -70,9 +70,11 @@ td:first-child {
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 9999;
             border-radius: 10px;
             margin-bottom: 30px;
+            overflow: visible !important;
+            padding-bottom: 0;
         }
 
         nav {
@@ -80,9 +82,10 @@ td:first-child {
             margin: 0 auto;
             display: flex;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 20px 150px 20px;
             min-height: 70px;
             gap: 0;
+            overflow: visible !important;
         }
 
         .nav-menu {
@@ -93,10 +96,12 @@ td:first-child {
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
+            overflow: visible !important;
         }
 
         .nav-menu li {
             position: relative;
+            overflow: visible !important;
         }
 
         .nav-menu > li > a {
@@ -131,9 +136,11 @@ td:first-child {
             list-style: none;
             min-width: 200px;
             border-radius: 0 0 8px 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1001;
-            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            overflow: visible !important;
+            margin: 0;
+            padding: 8px 0;
         }
 
         .nav-menu li:hover .submenu {
@@ -184,6 +191,7 @@ td:first-child {
             padding: 40px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             min-height: 500px;
+            overflow: visible;
         }
 
         /* Página de contenido */
